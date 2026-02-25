@@ -1,31 +1,52 @@
 <!DOCTYPE HTML>
-<!--
-	Lens by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
+<head>
+    <title>{{ site.title }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ "assets/css/main.css" | relative_url }}" />
+    <style>
+        /* Emergency Layout Fix - Forces the Dior/Celine look if main.css fails */
+        body { background-color: #ffffff !important; color: #000 !important; font-family: "Playfair Display", serif; }
+        #main { background: #fff !important; border-left: 1px solid #eee; width: 30%; position: fixed; right: 0; top: 0; height: 100vh; padding: 4em 2em; text-align: right; z-index: 10; }
+        #viewer { position: fixed; top: 0; left: 0; width: 70%; height: 100vh; background: #fff; overflow: hidden; }
+        #thumbnails { display: flex; flex-wrap: wrap; width: 70%; padding: 10px; background: #fff; }
+        article { width: 50%; padding: 10px; box-sizing: border-box; }
+        article img { width: 100%; filter: grayscale(100%); transition: filter 0.5s; }
+        article img:hover { filter: grayscale(0%); }
+        h1 { letter-spacing: 0.4em; text-transform: uppercase; font-size: 1.8em; margin-bottom: 0.2em; }
+        p { letter-spacing: 0.2em; font-size: 0.8em; color: #888; text-transform: uppercase; }
+    </style>
+</head>
+<body class="is-loading-0 is-loading-1 is-loading-2">
 
-{% include head.html %}
+    <div id="main">
+        <header id="header">
+            <h1>{{ site.title }}</h1>
+            <p>{{ site.description }}</p>
+        </header>
 
-    <body class="is-loading-0 is-loading-1 is-loading-2">
+        <footer id="footer">
+            <ul class="copyright">
+                <li>&copy; {{ site.title }}</li><li>Design: CELINE EDIT</li>
+            </ul>
+        </footer>
+    </div>
 
-        <!-- Main -->
-        <div id="main">
+    <div id="thumbnails">
+        {% for photo in site.photos %}
+            <article>
+                <a class="thumbnail" href="{{ photo.image | relative_url }}">
+                    <img src="{{ photo.image | relative_url }}" alt="" />
+                </a>
+                <h2>{{ photo.title }}</h2>
+                <p>{{ photo.description }}</p>
+            </article>
+        {% endfor %}
+    </div>
 
-        {% include header.html %}
-        
-        {{ content }}
+    <script src="{{ "assets/js/jquery.min.js" | absolute_url }}"></script>
+    <script src="{{ "assets/js/main.js" | absolute_url }}"></script>
 
-        {% include footer.html %}
-
-        </div>
-
-        <!-- Scripts -->
-        <script src="{{ "assets/js/jquery.min.js" | absolute_url }}"></script>
-        <script src="{{ "assets/js/skel.min.js" | absolute_url }}"></script>
-        <!--[if lte IE 8]><script src="{{ "assets/js/ie/respond.min.js" | absolute_url }}></script><![endif]-->
-        <script src="{{ "assets/js/main.js" | absolute_url }}"></script>
-
-    </body>
+</body>
 </html>
